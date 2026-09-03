@@ -125,6 +125,7 @@ npx retrofit-sdk-gen security ./app.apk
 > * **Base URLs**: Android applications often construct base URLs dynamically at runtime (e.g. environment flavors like Staging/Prod, regional CDN routing, or remote configuration). You may need to adjust the `baseUrl` in your client file to match your intended backend environment.
 > * **Authentication & Dynamic Tokens**: When apps use dynamic OAuth token refreshes, HMAC signatures, or session cookies, you can plug your credentials directly into the client's auth helper or default headers.
 > * **Non-Destructive Re-runs**: `retrofit-sdk-gen` is safe to run repeatedly. Once you customize a client file, subsequent runs will **never overwrite** your custom client logic while refreshing services and models!
+> * 📖 For complete syntax and recipes across all 8 languages, see the dedicated [🌐 Client Configuration Guide](docs/client.md).
 
 ---
 
@@ -246,8 +247,9 @@ console.log("Auth Headers:", security.authHeaders);
 
 ---
 
-## 📚 Dedicated Language Guides
+## 📚 Dedicated Guides
 
+- [🌐 Universal Client Configuration Guide](docs/client.md)
 - [📘 TypeScript SDK Guide](docs/typescript.md)
 - [🐍 Python SDK Guide](docs/python.md)
 - [🐹 Go (Golang) SDK Guide](docs/go.md)
