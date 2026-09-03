@@ -46,7 +46,7 @@ export function generateGoSdk(options: GoGeneratorOptions): {
 
   // 4. go.mod
   const goModPath = path.join(outputDir, "go.mod");
-  fs.writeFileSync(goModPath, `module sdk\n\ngo 1.20\n`, "utf8");
+  fs.writeFileSync(goModPath, `module sdk\n\ngo 1.22\n`, "utf8");
 
   return { clientPath, servicesPath, modelsPath };
 }

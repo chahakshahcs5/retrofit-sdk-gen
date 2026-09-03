@@ -256,6 +256,31 @@ export async function generateSdk(options: SdkGeneratorOptions = {}): Promise<Sd
     await formatFile(indexFilePath);
     const formatDuration = Date.now() - formatStart;
     console.log(`[FORMAT] Formatted SDK files with Prettier in ${formatDuration}ms!\n`);
+
+    // Emit standard tsconfig.json if missing
+    const tsconfigOutPath = path.join(tsOut, "tsconfig.json");
+    if (!fs.existsSync(tsconfigOutPath)) {
+      fs.writeFileSync(
+        tsconfigOutPath,
+        JSON.stringify(
+          {
+            compilerOptions: {
+              target: "ES2022",
+              module: "CommonJS",
+              moduleResolution: "node",
+              strict: false,
+              noEmit: true,
+              skipLibCheck: true,
+              forceConsistentCasingInFileNames: true,
+            },
+            include: ["./**/*"],
+          },
+          null,
+          2
+        ),
+        "utf8"
+      );
+    }
   }
 
   // Extract DTO models once for all languages
