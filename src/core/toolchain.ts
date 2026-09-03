@@ -247,35 +247,8 @@ export async function compileSdk(
 
     switch (language) {
       case "typescript": {
-        // Create temporary tsconfig if missing for strict check
-        const tsconfigPath = path.join(absSdkDir, "tsconfig.json");
-        const hadTsconfig = fs.existsSync(tsconfigPath);
-        if (!hadTsconfig) {
-          fs.writeFileSync(
-            tsconfigPath,
-            JSON.stringify(
-              {
-                compilerOptions: {
-                  target: "ES2022",
-                  module: "CommonJS",
-                  moduleResolution: "node",
-                  strict: false,
-                  noEmit: true,
-                  skipLibCheck: true,
-                },
-              },
-              null,
-              2
-            )
-          );
-        }
-
+        // Run TypeScript compiler check
         result = runExec("npx -y tsc --noEmit -p .", absSdkDir);
-        if (!hadTsconfig) {
-          try {
-            fs.unlinkSync(tsconfigPath);
-          } catch {}
-        }
         break;
       }
 

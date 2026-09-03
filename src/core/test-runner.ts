@@ -9,7 +9,7 @@ import { isPackageFile, decompilePackage } from "./decompiler";
 import { extractDtoModels, DtoExtractionResult } from "./dto-extractor";
 import { generateOpenApi, OpenApiSpec } from "../exporters/openapi";
 import { generatePostmanCollection } from "../exporters/postman";
-import { generateTypeScriptModels, generateServices, generateClientCode } from "../exporters/typescript";
+import { generateTypeScriptSdk } from "../exporters/typescript/index";
 import { generatePythonSdk } from "../exporters/python/index";
 import { generateGoSdk } from "../exporters/go/index";
 import { generateCSharpSdk } from "../exporters/csharp/index";
@@ -144,29 +144,16 @@ export async function runSdkVerification(options: TestRunnerOptions): Promise<Te
     generatedDirs[lang] = langDir;
 
     switch (lang) {
-      case "typescript": {
-        const typesPath = path.join(langDir, "types.ts");
-        const indexPath = path.join(langDir, "index.ts");
-        const clientPath = path.join(langDir, "client.ts");
-        generateTypeScriptModels({
+      case "typescript":
+        generateTypeScriptSdk({
+          endpoints: scanResult.apis,
+          outputDir: langDir,
           sourcesDir,
-          outputPath: typesPath,
-          endpoints: scanResult.apis,
-          verbose: false,
-        });
-        generateServices({
-          endpoints: scanResult.apis,
-          outputPath: indexPath,
-          modelsPath: typesPath,
-          verbose: false,
-        });
-        const clientCode = generateClientCode({
-          baseUrl: scanResult.detectedBaseUrl || "https://api.example.com",
+          baseUrl: scanResult.detectedBaseUrl,
           securityResult,
+          dtoResult,
         });
-        fs.writeFileSync(clientPath, clientCode, "utf8");
         break;
-      }
       case "python":
         generatePythonSdk({ endpoints: scanResult.apis, outputDir: langDir, sourcesDir, baseUrl: scanResult.detectedBaseUrl });
         break;
