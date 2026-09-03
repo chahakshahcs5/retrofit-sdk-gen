@@ -1,0 +1,50 @@
+{
+  "name": "retrofit-sdk-gen",
+  "version": "1.0.0",
+  "description": "Universal Android Retrofit to Multi-Language SDK Generator: emits TypeScript, Python, Go, C#, Java, Rust, C++, C SDKs, OpenAPI 3.0, and Postman Collections.",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bin": {
+    "retrofit-sdk-gen": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\" && tsc",
+    "prepublishOnly": "npm run build",
+    "fixtures:download": "node ./scripts/download-fixtures.js",
+    "test:shopflow": "node ./dist/cli.js test test-fixtures/ShopFlow.apk",
+    "test:github": "node ./dist/cli.js test \"test-fixtures/GitHub Client.apk\"",
+    "test:crypto": "node ./dist/cli.js test \"test-fixtures/Crypto Tracker.apk\"",
+    "test:all-apks": "npm run test:shopflow && npm run test:github && npm run test:crypto"
+  },
+  "keywords": [
+    "retrofit",
+    "android",
+    "sdk-generator",
+    "typescript",
+    "reverse-engineering",
+    "apk",
+    "api-client"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chahakshahcs5/retrofit-sdk-gen.git"
+  },
+  "homepage": "https://github.com/chahakshahcs5/retrofit-sdk-gen#readme",
+  "bugs": {
+    "url": "https://github.com/chahakshahcs5/retrofit-sdk-gen/issues"
+  },
+  "dependencies": {
+    "prettier": "^3.9.6"
+  }
+}

@@ -1,0 +1,530 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Generated Retrofit API Specification",
+    "version": "1.0.0",
+    "description": "OpenAPI 3.0 specification automatically generated from Android Retrofit decompiled interfaces (6 endpoints)."
+  },
+  "servers": [
+    {
+      "url": "https://api.coingecko.com/api/v3/",
+      "description": "API Server"
+    }
+  ],
+  "paths": {
+    "/coins/{id}": {
+      "get": {
+        "summary": "CoinGeckoApi.getCoinDetail",
+        "operationId": "CoinGeckoApi_getCoinDetail",
+        "tags": [
+          "CoinGeckoApi"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "localization",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "tickers",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "market_data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "community_data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "developer_data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sparkline",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoinDetailDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/global": {
+      "get": {
+        "summary": "CoinGeckoApi.getGlobalData",
+        "operationId": "CoinGeckoApi_getGlobalData",
+        "tags": [
+          "CoinGeckoApi"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlobalDataResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coins/{id}/market_chart": {
+      "get": {
+        "summary": "CoinGeckoApi.getMarketChart",
+        "operationId": "CoinGeckoApi_getMarketChart",
+        "tags": [
+          "CoinGeckoApi"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "vs_currency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketChartDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coins/markets": {
+      "get": {
+        "summary": "CoinGeckoApi.getTopCoins",
+        "operationId": "CoinGeckoApi_getTopCoins",
+        "tags": [
+          "CoinGeckoApi"
+        ],
+        "parameters": [
+          {
+            "name": "vs_currency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "sparkline",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "price_change_percentage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/trending": {
+      "get": {
+        "summary": "CoinGeckoApi.getTrendingCoins",
+        "operationId": "CoinGeckoApi_getTrendingCoins",
+        "tags": [
+          "CoinGeckoApi"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrendingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "CoinGeckoApi.searchCoins",
+        "operationId": "CoinGeckoApi_searchCoins",
+        "tags": [
+          "CoinGeckoApi"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CoinDescriptionDto": {
+        "type": "object",
+        "properties": {
+          "en": {
+            "type": "string"
+          }
+        }
+      },
+      "CoinImageDto": {
+        "type": "object",
+        "properties": {
+          "thumb": {
+            "type": "string"
+          },
+          "small": {
+            "type": "string"
+          },
+          "large": {
+            "type": "string"
+          }
+        }
+      },
+      "MarketDataDto": {
+        "type": "object",
+        "properties": {
+          "map": {
+            "type": "object"
+          },
+          "map2": {
+            "type": "object"
+          },
+          "map3": {
+            "type": "object"
+          },
+          "map4": {
+            "type": "object"
+          },
+          "map5": {
+            "type": "object"
+          },
+          "priceChange24h": {
+            "type": "number"
+          },
+          "priceChangePercentage24h": {
+            "type": "number"
+          },
+          "priceChangePercentage7d": {
+            "type": "number"
+          },
+          "priceChangePercentage30d": {
+            "type": "number"
+          },
+          "priceChangePercentage1y": {
+            "type": "number"
+          },
+          "circulatingSupply": {
+            "type": "number"
+          },
+          "totalSupply": {
+            "type": "number"
+          },
+          "maxSupply": {
+            "type": "number"
+          },
+          "map6": {
+            "type": "object"
+          },
+          "map7": {
+            "type": "object"
+          },
+          "sparkline7d": {
+            "$ref": "#/components/schemas/SparklineDto"
+          }
+        }
+      },
+      "GlobalDataDto": {
+        "type": "object",
+        "properties": {
+          "activeCryptos": {
+            "type": "number"
+          },
+          "map": {
+            "type": "object"
+          },
+          "map2": {
+            "type": "object"
+          },
+          "map3": {
+            "type": "object"
+          },
+          "marketCapChange24hUsd": {
+            "type": "number"
+          }
+        }
+      },
+      "TrendingCoinItemDto": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "$ref": "#/components/schemas/TrendingCoinDto"
+          }
+        }
+      },
+      "SearchCoinDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "marketCapRank": {
+            "type": "number"
+          },
+          "thumb": {
+            "type": "string"
+          },
+          "large": {
+            "type": "string"
+          }
+        }
+      },
+      "CoinDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "$ref": "#/components/schemas/CoinDescriptionDto"
+          },
+          "image": {
+            "$ref": "#/components/schemas/CoinImageDto"
+          },
+          "marketCapRank": {
+            "type": "number"
+          },
+          "marketData": {
+            "$ref": "#/components/schemas/MarketDataDto"
+          }
+        }
+      },
+      "GlobalDataResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GlobalDataDto"
+          }
+        }
+      },
+      "MarketChartDto": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/number[]"
+            }
+          }
+        }
+      },
+      "List_CoinMarketDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "TrendingResponse": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrendingCoinItemDto"
+            }
+          }
+        }
+      },
+      "SearchResponse": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchCoinDto"
+            }
+          }
+        }
+      },
+      "SparklineDto": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "object"
+          }
+        }
+      },
+      "TrendingCoinDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "object"
+          },
+          "coinId": {
+            "type": "object"
+          },
+          "name": {
+            "type": "object"
+          },
+          "symbol": {
+            "type": "object"
+          },
+          "marketCapRank": {
+            "type": "object"
+          },
+          "thumb": {
+            "type": "object"
+          },
+          "small": {
+            "type": "object"
+          },
+          "large": {
+            "type": "object"
+          },
+          "score": {
+            "type": "object"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

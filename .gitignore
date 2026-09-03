@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.apk
+*.apkm
+*.xapk
+*.aab
+*.apks
+.retrofit-test/

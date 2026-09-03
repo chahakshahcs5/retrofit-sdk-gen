@@ -1,0 +1,437 @@
+{
+  "info": {
+    "name": "App API Endpoints (Generated from Retrofit)",
+    "description": "Auto-generated Postman Collection from Android Retrofit decompiled interfaces (11 endpoints).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.github.com/",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "GitHubApiService",
+      "item": [
+        {
+          "name": "GET repos/{owner}/{repo}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/repos/:owner/:repo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "repos",
+                ":owner",
+                ":repo"
+              ],
+              "variable": [
+                {
+                  "key": "owner",
+                  "value": "1",
+                  "description": "Path Parameter"
+                },
+                {
+                  "key": "repo",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: getRepository\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET repos/{owner}/{repo}/commits",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/repos/:owner/:repo/commits",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "repos",
+                ":owner",
+                ":repo",
+                "commits"
+              ],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "owner",
+                  "value": "1",
+                  "description": "Path Parameter"
+                },
+                {
+                  "key": "repo",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: getRepositoryCommits\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET repos/{owner}/{repo}/contributors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/repos/:owner/:repo/contributors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "repos",
+                ":owner",
+                ":repo",
+                "contributors"
+              ],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "owner",
+                  "value": "1",
+                  "description": "Path Parameter"
+                },
+                {
+                  "key": "repo",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: getRepositoryContributors\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET repos/{owner}/{repo}/issues",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/repos/:owner/:repo/issues",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "repos",
+                ":owner",
+                ":repo",
+                "issues"
+              ],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "owner",
+                  "value": "1",
+                  "description": "Path Parameter"
+                },
+                {
+                  "key": "repo",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: getRepositoryIssues\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET repos/{owner}/{repo}/readme",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/repos/:owner/:repo/readme",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "repos",
+                ":owner",
+                ":repo",
+                "readme"
+              ],
+              "variable": [
+                {
+                  "key": "owner",
+                  "value": "1",
+                  "description": "Path Parameter"
+                },
+                {
+                  "key": "repo",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: getRepositoryReadme\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET users/{username}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/:username",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":username"
+              ],
+              "variable": [
+                {
+                  "key": "username",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: getUser\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET users/{username}/repos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/:username/repos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":username",
+                "repos"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "username",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: getUserRepositories\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET users/{username}/starred",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/:username/starred",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":username",
+                "starred"
+              ],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "username",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: getUserStarredRepositories\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET search/code",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/search/code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search",
+                "code"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "sort",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: searchCode\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET search/repositories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/search/repositories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search",
+                "repositories"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "sort",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: searchRepositories\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        },
+        {
+          "name": "GET search/users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/search/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "sort",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: GitHubApiService\nFunction: searchUsers\nSource: com/example/data/api/GitHubApiService.java"
+          }
+        }
+      ]
+    }
+  ]
+}

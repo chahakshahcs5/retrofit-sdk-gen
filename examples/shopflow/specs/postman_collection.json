@@ -1,0 +1,264 @@
+{
+  "info": {
+    "name": "App API Endpoints (Generated from Retrofit)",
+    "description": "Auto-generated Postman Collection from Android Retrofit decompiled interfaces (8 endpoints).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://dummyjson.com/",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "DummyJsonApi",
+      "item": [
+        {
+          "name": "GET products/categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/products/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                "categories"
+              ]
+            },
+            "description": "Retrofit Interface: DummyJsonApi\nFunction: getCategories\nSource: com/example/data/api/DummyJsonApi.java"
+          }
+        },
+        {
+          "name": "GET products/category-list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/products/category-list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                "category-list"
+              ]
+            },
+            "description": "Retrofit Interface: DummyJsonApi\nFunction: getCategoryList\nSource: com/example/data/api/DummyJsonApi.java"
+          }
+        },
+        {
+          "name": "GET auth/me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            },
+            "description": "Retrofit Interface: DummyJsonApi\nFunction: getCurrentUser\nSource: com/example/data/api/DummyJsonApi.java"
+          }
+        },
+        {
+          "name": "GET products/{id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/products/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: DummyJsonApi\nFunction: getProductById\nSource: com/example/data/api/DummyJsonApi.java"
+          }
+        },
+        {
+          "name": "GET products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "skip",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "description": "Type: string"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: DummyJsonApi\nFunction: getProducts\nSource: com/example/data/api/DummyJsonApi.java"
+          }
+        },
+        {
+          "name": "GET products/category/{category}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/products/category/:category",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                "category",
+                ":category"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "skip",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "description": "Type: string"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "category",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: DummyJsonApi\nFunction: getProductsByCategory\nSource: com/example/data/api/DummyJsonApi.java"
+          }
+        },
+        {
+          "name": "POST auth/login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"sample payload\",\n  \"type\": \"LoginRequest\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Retrofit Interface: DummyJsonApi\nFunction: login\nSource: com/example/data/api/DummyJsonApi.java"
+          }
+        },
+        {
+          "name": "GET products/search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/products/search",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "limit",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "skip",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "description": "Type: string"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: DummyJsonApi\nFunction: searchProducts\nSource: com/example/data/api/DummyJsonApi.java"
+          }
+        }
+      ]
+    }
+  ]
+}

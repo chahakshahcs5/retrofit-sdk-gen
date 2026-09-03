@@ -1,0 +1,94 @@
+name: CI Test Suite
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-verify:
+    name: Build & Verify Multi-Language Engine
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (v20)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Setup Java (JDK 17)
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Setup C / C++ Toolchain & CMake
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y build-essential cmake gcc g++ clang
+
+      - name: Install NPM Dependencies
+        run: npm ci
+
+      - name: Compile TypeScript Engine
+        run: npm run build
+
+      - name: Verify CLI Help & Options
+        run: node ./dist/cli.js --help
+
+      - name: Download Sample APK Fixtures from Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p test-fixtures
+          if gh release view fixtures-v1.0 --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "✅ Downloading fixtures from GitHub release (fixtures-v1.0)..."
+            gh release download fixtures-v1.0 --dir test-fixtures --repo "${{ github.repository }}"
+          else
+            echo "ℹ️ Notice: Release tag 'fixtures-v1.0' not found yet on ${{ github.repository }}."
+            echo "Attempting fallback download via scripts/download-fixtures.js..."
+            node ./scripts/download-fixtures.js || true
+          fi
+
+      - name: Run End-to-End Test Runner on Real APK (Complete Pipeline)
+        run: |
+          if [ -f "test-fixtures/ShopFlow.apk" ]; then
+            echo "🚀 Running Full 4-Stage Verification Pipeline on ShopFlow.apk..."
+            node ./dist/cli.js test "test-fixtures/ShopFlow.apk" --lang python,go,csharp,java,rust,cpp,c
+          else
+            echo "⚠️  Fixtures release not yet published; verifying pre-generated 8-language SDK matrix..."
+            node -e "
+            const { compileSdk, detectToolchains } = require('./dist/core/toolchain');
+            const tc = detectToolchains();
+            (async () => {
+              for (const lang of ['typescript', 'python', 'go', 'csharp', 'java', 'rust', 'cpp', 'c']) {
+                const res = await compileSdk(lang, 'examples/shopflow/sdks/' + lang, tc[lang]);
+                console.log('  [' + lang + '] ' + (res.passed ? 'PASSED ✅' : res.skipped ? 'SKIPPED ⏩' : 'FAILED ❌'));
+                if (res.error && !res.skipped) process.exit(1);
+              }
+            })();
+            "
+          fi

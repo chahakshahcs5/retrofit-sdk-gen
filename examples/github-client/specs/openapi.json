@@ -1,0 +1,739 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Generated Retrofit API Specification",
+    "version": "1.0.0",
+    "description": "OpenAPI 3.0 specification automatically generated from Android Retrofit decompiled interfaces (11 endpoints)."
+  },
+  "servers": [
+    {
+      "url": "https://api.github.com/",
+      "description": "API Server"
+    }
+  ],
+  "paths": {
+    "/repos/{owner}/{repo}": {
+      "get": {
+        "summary": "GitHubApiService.getRepository",
+        "operationId": "GitHubApiService_getRepository",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GitHubRepo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/repos/{owner}/{repo}/commits": {
+      "get": {
+        "summary": "GitHubApiService.getRepositoryCommits",
+        "operationId": "GitHubApiService_getRepositoryCommits",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/repos/{owner}/{repo}/contributors": {
+      "get": {
+        "summary": "GitHubApiService.getRepositoryContributors",
+        "operationId": "GitHubApiService_getRepositoryContributors",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/repos/{owner}/{repo}/issues": {
+      "get": {
+        "summary": "GitHubApiService.getRepositoryIssues",
+        "operationId": "GitHubApiService_getRepositoryIssues",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/repos/{owner}/{repo}/readme": {
+      "get": {
+        "summary": "GitHubApiService.getRepositoryReadme",
+        "operationId": "GitHubApiService_getRepositoryReadme",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GitHubReadme"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{username}": {
+      "get": {
+        "summary": "GitHubApiService.getUser",
+        "operationId": "GitHubApiService_getUser",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GitHubUser"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{username}/repos": {
+      "get": {
+        "summary": "GitHubApiService.getUserRepositories",
+        "operationId": "GitHubApiService_getUserRepositories",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{username}/starred": {
+      "get": {
+        "summary": "GitHubApiService.getUserStarredRepositories",
+        "operationId": "GitHubApiService_getUserStarredRepositories",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/code": {
+      "get": {
+        "summary": "GitHubApiService.searchCode",
+        "operationId": "GitHubApiService_searchCode",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/repositories": {
+      "get": {
+        "summary": "GitHubApiService.searchRepositories",
+        "operationId": "GitHubApiService_searchRepositories",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/users": {
+      "get": {
+        "summary": "GitHubApiService.searchUsers",
+        "operationId": "GitHubApiService_searchUsers",
+        "tags": [
+          "GitHubApiService"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LicenseInfo": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "spdxId": {
+            "type": "string"
+          }
+        }
+      },
+      "GitHubRepo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "htmlUrl": {
+            "type": "string"
+          },
+          "stargazersCount": {
+            "type": "number"
+          },
+          "forksCount": {
+            "type": "number"
+          },
+          "openIssuesCount": {
+            "type": "number"
+          },
+          "watchersCount": {
+            "type": "number"
+          },
+          "language": {
+            "type": "string"
+          },
+          "defaultBranch": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/GitHubUser"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "license": {
+            "$ref": "#/components/schemas/LicenseInfo"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "isFork": {
+            "type": "boolean"
+          }
+        }
+      },
+      "List_GitHubCommit": {
+        "type": "object",
+        "properties": {}
+      },
+      "List_GitHubUser": {
+        "type": "object",
+        "properties": {}
+      },
+      "List_GitHubIssue": {
+        "type": "object",
+        "properties": {}
+      },
+      "GitHubReadme": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "sha": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "downloadUrl": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "encoding": {
+            "type": "string"
+          },
+          "htmlUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "GitHubUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "login": {
+            "type": "string"
+          },
+          "avatarUrl": {
+            "type": "string"
+          },
+          "htmlUrl": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "blog": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "publicRepos": {
+            "type": "number"
+          },
+          "publicGists": {
+            "type": "number"
+          },
+          "followers": {
+            "type": "number"
+          },
+          "following": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "contributions": {
+            "type": "number"
+          }
+        }
+      },
+      "List_GitHubRepo": {
+        "type": "object",
+        "properties": {}
+      },
+      "SearchResponse_GitHubCodeItem": {
+        "type": "object",
+        "properties": {}
+      },
+      "SearchResponse_GitHubRepo": {
+        "type": "object",
+        "properties": {}
+      },
+      "SearchResponse_GitHubUser": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

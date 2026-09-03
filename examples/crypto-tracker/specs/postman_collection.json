@@ -1,0 +1,225 @@
+{
+  "info": {
+    "name": "App API Endpoints (Generated from Retrofit)",
+    "description": "Auto-generated Postman Collection from Android Retrofit decompiled interfaces (6 endpoints).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3/",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "CoinGeckoApi",
+      "item": [
+        {
+          "name": "GET coins/{id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/coins/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "coins",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "localization",
+                  "value": "",
+                  "description": "Type: boolean"
+                },
+                {
+                  "key": "tickers",
+                  "value": "",
+                  "description": "Type: boolean"
+                },
+                {
+                  "key": "market_data",
+                  "value": "",
+                  "description": "Type: boolean"
+                },
+                {
+                  "key": "community_data",
+                  "value": "",
+                  "description": "Type: boolean"
+                },
+                {
+                  "key": "developer_data",
+                  "value": "",
+                  "description": "Type: boolean"
+                },
+                {
+                  "key": "sparkline",
+                  "value": "",
+                  "description": "Type: boolean"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: CoinGeckoApi\nFunction: getCoinDetail\nSource: com/example/data/api/CoinGeckoApi.java"
+          }
+        },
+        {
+          "name": "GET global",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/global",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "global"
+              ]
+            },
+            "description": "Retrofit Interface: CoinGeckoApi\nFunction: getGlobalData\nSource: com/example/data/api/CoinGeckoApi.java"
+          }
+        },
+        {
+          "name": "GET coins/{id}/market_chart",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/coins/:id/market_chart",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "coins",
+                ":id",
+                "market_chart"
+              ],
+              "query": [
+                {
+                  "key": "vs_currency",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "days",
+                  "value": "",
+                  "description": "Type: string"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "Path Parameter"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: CoinGeckoApi\nFunction: getMarketChart\nSource: com/example/data/api/CoinGeckoApi.java"
+          }
+        },
+        {
+          "name": "GET coins/markets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/coins/markets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "coins",
+                "markets"
+              ],
+              "query": [
+                {
+                  "key": "vs_currency",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "order",
+                  "value": "",
+                  "description": "Type: string"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "Type: number"
+                },
+                {
+                  "key": "sparkline",
+                  "value": "",
+                  "description": "Type: boolean"
+                },
+                {
+                  "key": "price_change_percentage",
+                  "value": "",
+                  "description": "Type: string"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: CoinGeckoApi\nFunction: getTopCoins\nSource: com/example/data/api/CoinGeckoApi.java"
+          }
+        },
+        {
+          "name": "GET search/trending",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/search/trending",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search",
+                "trending"
+              ]
+            },
+            "description": "Retrofit Interface: CoinGeckoApi\nFunction: getTrendingCoins\nSource: com/example/data/api/CoinGeckoApi.java"
+          }
+        },
+        {
+          "name": "GET search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/search",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "",
+                  "description": "Type: string"
+                }
+              ]
+            },
+            "description": "Retrofit Interface: CoinGeckoApi\nFunction: searchCoins\nSource: com/example/data/api/CoinGeckoApi.java"
+          }
+        }
+      ]
+    }
+  ]
+}
