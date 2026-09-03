@@ -228,6 +228,7 @@ export async function compileSdk(
   }
 
   const isWindows = process.platform === "win32";
+  const absSdkDir = path.resolve(sdkDir);
 
   try {
     let result: { status: number | null; stdout: string; stderr: string };
@@ -235,7 +236,7 @@ export async function compileSdk(
     switch (language) {
       case "typescript": {
         // Create temporary tsconfig if missing for strict check
-        const tsconfigPath = path.join(sdkDir, "tsconfig.json");
+        const tsconfigPath = path.join(absSdkDir, "tsconfig.json");
         const hadTsconfig = fs.existsSync(tsconfigPath);
         if (!hadTsconfig) {
           fs.writeFileSync(
@@ -258,8 +259,8 @@ export async function compileSdk(
         }
 
         const cmd = isWindows ? "npx.cmd" : "npx";
-        const args = ["-y", "tsc", "--noEmit", "-p", sdkDir];
-        const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+        const args = ["-y", "tsc", "--noEmit", "-p", "."];
+        const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
         if (!hadTsconfig) {
           try {
             fs.unlinkSync(tsconfigPath);
@@ -273,7 +274,7 @@ export async function compileSdk(
         // Syntax check all Python files using python compileall
         const cmd = toolchain.binary;
         const args = ["-m", "compileall", "-q", "."];
-        const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+        const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
         result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         break;
       }
@@ -282,7 +283,7 @@ export async function compileSdk(
         // Run go vet ./...
         const cmd = "go";
         const args = ["vet", "./..."];
-        const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+        const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
         result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         break;
       }
@@ -291,14 +292,14 @@ export async function compileSdk(
         // Run dotnet build
         const cmd = "dotnet";
         const args = ["build", "-c", "Release", "--nologo"];
-        const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+        const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
         result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         break;
       }
 
       case "java": {
         // Compile all Java sources with javac
-        const tempBin = path.join(sdkDir, ".bin");
+        const tempBin = path.join(absSdkDir, ".bin");
         if (!fs.existsSync(tempBin)) fs.mkdirSync(tempBin, { recursive: true });
 
         const javaFiles: string[] = [];
@@ -309,14 +310,14 @@ export async function compileSdk(
             else if (ent.isFile() && ent.name.endsWith(".java")) javaFiles.push(p);
           }
         };
-        findJavaFiles(sdkDir);
+        findJavaFiles(absSdkDir);
 
         if (javaFiles.length === 0) {
           result = { status: 0, stdout: "No java files to compile", stderr: "" };
         } else {
           const cmd = "javac";
           const args = ["-d", tempBin, ...javaFiles];
-          const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+          const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
           try {
             fs.rmSync(tempBin, { recursive: true, force: true });
           } catch {}
@@ -329,7 +330,7 @@ export async function compileSdk(
         // Run cargo check
         const cmd = "cargo";
         const args = ["check", "--quiet"];
-        const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+        const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
         result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         break;
       }
@@ -338,9 +339,9 @@ export async function compileSdk(
         // Check CMakeLists.txt configuration with CMake (supports Visual Studio Build Tools)
         const cmd = toolchain.binary.toLowerCase().includes("cmake") ? `"${toolchain.binary}"` : "cmake";
         const args = ["-B", "build_test", "-S", "."];
-        const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+        const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
         try {
-          fs.rmSync(path.join(sdkDir, "build_test"), { recursive: true, force: true });
+          fs.rmSync(path.join(absSdkDir, "build_test"), { recursive: true, force: true });
         } catch {}
         result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         break;
@@ -348,13 +349,13 @@ export async function compileSdk(
 
       case "c": {
         // If CMakeLists.txt is present and CMake is available, use CMake
-        const cmakeListsPath = path.join(sdkDir, "CMakeLists.txt");
-        if (fs.existsSync(cmakeListsPath) && toolchain.binary.toLowerCase().includes("cmake")) {
-          const cmd = `"${toolchain.binary}"`;
+        const cmakeListsPath = path.join(absSdkDir, "CMakeLists.txt");
+        if (fs.existsSync(cmakeListsPath)) {
+          const cmd = toolchain.binary.toLowerCase().includes("cmake") ? `"${toolchain.binary}"` : "cmake";
           const args = ["-B", "build_test", "-S", "."];
-          const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+          const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
           try {
-            fs.rmSync(path.join(sdkDir, "build_test"), { recursive: true, force: true });
+            fs.rmSync(path.join(absSdkDir, "build_test"), { recursive: true, force: true });
           } catch {}
           result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         } else {
@@ -367,14 +368,14 @@ export async function compileSdk(
               else if (ent.isFile() && ent.name.endsWith(".c")) cFiles.push(p);
             }
           };
-          findCFiles(sdkDir);
+          findCFiles(absSdkDir);
 
           if (cFiles.length === 0) {
             result = { status: 0, stdout: "No C files to compile", stderr: "" };
           } else {
             const cmd = toolchain.binary;
             const args = ["-fsyntax-only", "-Iinclude", ...cFiles];
-            const res = spawnSync(cmd, args, { shell: isWindows, cwd: sdkDir, encoding: "utf8" });
+            const res = spawnSync(cmd, args, { shell: isWindows, cwd: absSdkDir, encoding: "utf8" });
             result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
           }
         }

@@ -75,7 +75,7 @@ jobs:
 
       - name: Run End-to-End Test Runner on Real APK (Complete Pipeline)
         run: |
-          if [ -f "test-fixtures/ShopFlow.apk" ]; then
+          if [ -s "test-fixtures/ShopFlow.apk" ]; then
             echo "🚀 Running Full 4-Stage Verification Pipeline on ShopFlow.apk..."
             node ./dist/cli.js test "test-fixtures/ShopFlow.apk" --lang python,go,csharp,java,rust,cpp,c
           else

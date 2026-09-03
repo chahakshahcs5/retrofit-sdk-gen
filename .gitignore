@@ -6,3 +6,11 @@ dist/
 *.aab
 *.apks
 .retrofit-test/
+__pycache__/
+*.pyc
+bin/
+obj/
+target/
+.bin/
+build_test/
+

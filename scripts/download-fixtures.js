@@ -31,22 +31,24 @@ console.log("===================================================================
 
 function downloadFile(url, dest) {
   return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(dest);
     https.get(url, (res) => {
       if (res.statusCode === 302 || res.statusCode === 301) {
         return downloadFile(res.headers.location, dest).then(resolve).catch(reject);
       }
       if (res.statusCode !== 200) {
-        fs.unlink(dest, () => {});
         return reject(new Error(`HTTP ${res.statusCode}: ${res.statusMessage}`));
       }
+      const file = fs.createWriteStream(dest);
       res.pipe(file);
       file.on("finish", () => {
         file.close();
         resolve();
       });
+      file.on("error", (err) => {
+        try { fs.unlinkSync(dest); } catch {}
+        reject(err);
+      });
     }).on("error", (err) => {
-      fs.unlink(dest, () => {});
       reject(err);
     });
   });
