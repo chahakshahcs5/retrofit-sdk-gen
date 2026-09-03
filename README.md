@@ -267,4 +267,5 @@ npm publish --access public
 
 ## 📄 License
 
-MIT © Google Deepmind / Antigravity Pair Programmer
+MIT License © 2026 [Chahak Shah](https://github.com/chahakshahcs5) and Contributors. See [LICENSE](LICENSE) for details.
+
