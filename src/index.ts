@@ -267,7 +267,6 @@ export async function generateSdk(options: SdkGeneratorOptions = {}): Promise<Sd
             compilerOptions: {
               target: "ES2022",
               module: "CommonJS",
-              moduleResolution: "node",
               strict: false,
               noEmit: true,
               skipLibCheck: true,

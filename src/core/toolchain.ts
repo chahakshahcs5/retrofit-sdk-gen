@@ -248,7 +248,7 @@ export async function compileSdk(
     switch (language) {
       case "typescript": {
         // Run TypeScript compiler check
-        result = runExec("npx -y tsc --noEmit -p .", absSdkDir);
+        result = runExec("npx -y -p typescript tsc --noEmit -p .", absSdkDir);
         break;
       }
 
