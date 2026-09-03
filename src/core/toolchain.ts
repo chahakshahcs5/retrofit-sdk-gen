@@ -227,8 +227,20 @@ export async function compileSdk(
     };
   }
 
-  const isWindows = process.platform === "win32";
   const absSdkDir = path.resolve(sdkDir);
+
+  function runExec(cmd: string, cwd: string): { status: number; stdout: string; stderr: string } {
+    try {
+      const stdout = execSync(cmd, { cwd, stdio: "pipe", encoding: "utf8", timeout: 120000 });
+      return { status: 0, stdout: stdout || "", stderr: "" };
+    } catch (err: any) {
+      return {
+        status: err.status || 1,
+        stdout: err.stdout ? err.stdout.toString() : "",
+        stderr: err.stderr ? err.stderr.toString() : err.message,
+      };
+    }
+  }
 
   try {
     let result: { status: number | null; stdout: string; stderr: string };
@@ -258,47 +270,31 @@ export async function compileSdk(
           );
         }
 
-        const cmd = isWindows ? "npx.cmd" : "npx";
-        const args = ["-y", "tsc", "--noEmit", "-p", "."];
-        const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
+        result = runExec("npx -y tsc --noEmit -p .", absSdkDir);
         if (!hadTsconfig) {
           try {
             fs.unlinkSync(tsconfigPath);
           } catch {}
         }
-        result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         break;
       }
 
       case "python": {
-        // Syntax check all Python files using python compileall
-        const cmd = toolchain.binary;
-        const args = ["-m", "compileall", "-q", "."];
-        const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
-        result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
+        result = runExec(`"${toolchain.binary}" -m compileall -q .`, absSdkDir);
         break;
       }
 
       case "go": {
-        // Run go vet ./...
-        const cmd = "go";
-        const args = ["vet", "./..."];
-        const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
-        result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
+        result = runExec("go vet ./...", absSdkDir);
         break;
       }
 
       case "csharp": {
-        // Run dotnet build
-        const cmd = "dotnet";
-        const args = ["build", "-c", "Release", "--nologo"];
-        const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
-        result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
+        result = runExec("dotnet build -c Release --nologo", absSdkDir);
         break;
       }
 
       case "java": {
-        // Compile all Java sources with javac
         const tempBin = path.join(absSdkDir, ".bin");
         if (!fs.existsSync(tempBin)) fs.mkdirSync(tempBin, { recursive: true });
 
@@ -315,51 +311,37 @@ export async function compileSdk(
         if (javaFiles.length === 0) {
           result = { status: 0, stdout: "No java files to compile", stderr: "" };
         } else {
-          const cmd = "javac";
-          const args = ["-d", tempBin, ...javaFiles];
-          const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
+          result = runExec(`javac -d "${tempBin}" ${javaFiles.map((f) => `"${f}"`).join(" ")}`, absSdkDir);
           try {
             fs.rmSync(tempBin, { recursive: true, force: true });
           } catch {}
-          result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         }
         break;
       }
 
       case "rust": {
-        // Run cargo check
-        const cmd = "cargo";
-        const args = ["check", "--quiet"];
-        const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
-        result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
+        result = runExec("cargo check --quiet", absSdkDir);
         break;
       }
 
       case "cpp": {
-        // Check CMakeLists.txt configuration with CMake (supports Visual Studio Build Tools)
-        const cmd = toolchain.binary.toLowerCase().includes("cmake") ? `"${toolchain.binary}"` : "cmake";
-        const args = ["-B", "build_test", "-S", "."];
-        const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
+        const cmakeBin = toolchain.binary.toLowerCase().includes("cmake") ? `"${toolchain.binary}"` : "cmake";
+        result = runExec(`${cmakeBin} -B build_test -S .`, absSdkDir);
         try {
           fs.rmSync(path.join(absSdkDir, "build_test"), { recursive: true, force: true });
         } catch {}
-        result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         break;
       }
 
       case "c": {
-        // If CMakeLists.txt is present and CMake is available, use CMake
         const cmakeListsPath = path.join(absSdkDir, "CMakeLists.txt");
         if (fs.existsSync(cmakeListsPath)) {
-          const cmd = toolchain.binary.toLowerCase().includes("cmake") ? `"${toolchain.binary}"` : "cmake";
-          const args = ["-B", "build_test", "-S", "."];
-          const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
+          const cmakeBin = toolchain.binary.toLowerCase().includes("cmake") ? `"${toolchain.binary}"` : "cmake";
+          result = runExec(`${cmakeBin} -B build_test -S .`, absSdkDir);
           try {
             fs.rmSync(path.join(absSdkDir, "build_test"), { recursive: true, force: true });
           } catch {}
-          result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
         } else {
-          // Check syntax using gcc/clang
           const cFiles: string[] = [];
           const findCFiles = (dir: string) => {
             for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -373,10 +355,7 @@ export async function compileSdk(
           if (cFiles.length === 0) {
             result = { status: 0, stdout: "No C files to compile", stderr: "" };
           } else {
-            const cmd = toolchain.binary;
-            const args = ["-fsyntax-only", "-Iinclude", ...cFiles];
-            const res = spawnSync(cmd, args, { shell: true, cwd: absSdkDir, encoding: "utf8" });
-            result = { status: res.status, stdout: res.stdout || "", stderr: res.stderr || "" };
+            result = runExec(`"${toolchain.binary}" -fsyntax-only -Iinclude ${cFiles.map((f) => `"${f}"`).join(" ")}`, absSdkDir);
           }
         }
         break;
