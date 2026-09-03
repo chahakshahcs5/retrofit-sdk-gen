@@ -14,10 +14,10 @@ Every application underwent the complete **4-Stage Verification Protocol**:
 
 ```mermaid
 flowchart LR
-    APK["Target APK Package"] --> S1["Stage 1: AST Reverse-Eng<br/>(JADX, Endpoints, DTOs)"]
-    S1 --> S2["Stage 2: Multi-Lang Codegen<br/>(TS, Py, Go, C#, Java, Rust, C++, C)"]
-    S2 --> S3["Stage 3: Compiler Matrix<br/>(tsc, py_compile, go vet, dotnet, javac, cargo, cmake)"]
-    S3 --> S4["Stage 4: Live Mock Ping<br/>(Ephemeral Server, HTTP Ping, Schema Match)"]
+    APK["Target APK Package"] --> S1["Stage 1: AST Reverse-Engineering"]
+    S1 --> S2["Stage 2: Multi-Language Codegen"]
+    S2 --> S3["Stage 3: Compiler Matrix Verification"]
+    S3 --> S4["Stage 4: Live Mock Ping and Schema Match"]
     S4 --> PASS["🟢 100% Native Compilation Pass"]
 ```
 

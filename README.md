@@ -36,12 +36,12 @@
 
 ```mermaid
 flowchart TD
-    A["Raw Android Package (.apk, .apkm, .xapk, .aab)"] --> B["Stage 1: Decompile & Unpack (Zero-Config JADX + SHA-256 Cache)"]
-    B --> C["Stage 2: Retrofit AST Scanner & OkHttp Security Audit"]
-    C --> D["Stage 3: Multi-Language Codegen & Exporters"]
+    A["Raw Android Package (.apk, .apkm, .xapk, .aab)"] --> B["Stage 1: Decompile and Unpack (Zero-Config JADX + SHA-256 Cache)"]
+    B --> C["Stage 2: Retrofit AST Scanner and OkHttp Security Audit"]
+    C --> D["Stage 3: Multi-Language Codegen and Exporters"]
     D --> E1["8x Idiomatic Language SDKs (TS, Py, Go, C#, Java, Rust, C++, C)"]
     D --> E2["API Specifications (OpenAPI 3.0.3 + Postman v2.1)"]
-    D --> E3["Interactive Scalar Playground & Synthetic Mock Engine"]
+    D --> E3["Interactive Scalar Playground and Synthetic Mock Engine"]
     E1 --> F["Stage 4: Automated Native Compiler Verification (tsc, go vet, dotnet, cargo, cmake)"]
 ```
 

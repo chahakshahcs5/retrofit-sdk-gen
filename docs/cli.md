@@ -65,12 +65,12 @@ retrofit-sdk-gen [input] [options]
 ```mermaid
 flowchart LR
     CLI["npx retrofit-sdk-gen"] --> CMD{"Command Selector"}
-    CMD -->|generate (default)| G["Generate Multi-Lang SDKs<br/>& OpenAPI/Postman Specs"]
-    CMD -->|serve| S["Start Interactive Scalar UI<br/>& Synthetic Mock API Server"]
-    CMD -->|diff| D["Compare Two APKs<br/>& Emit Changelog Diff"]
-    CMD -->|security| SEC["Audit OkHttp Interceptors<br/>for Auth & Tracking Headers"]
-    CMD -->|clean| C["Wipe Decompiled Cache<br/>or Downloaded JADX Binaries"]
-    CMD -->|test| T["Run 4-Stage Verification<br/>with Native Language Compilers"]
+    CMD -->|"generate (default)"| G["Generate Multi-Language SDKs and API Specs"]
+    CMD -->|serve| S["Start Interactive Scalar UI and Mock Server"]
+    CMD -->|diff| D["Compare Two APKs and Emit Changelog Diff"]
+    CMD -->|security| SEC["Audit OkHttp Interceptors for Auth and Headers"]
+    CMD -->|clean| C["Wipe Decompiled Cache or JADX Binaries"]
+    CMD -->|test| T["Run 4-Stage Verification with Native Compilers"]
 
     G --> OUT["./sdk Output Folder"]
     S --> BROWSER["Browser http://localhost:3000"]

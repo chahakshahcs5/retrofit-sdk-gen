@@ -28,16 +28,16 @@ The Docker container encapsulates both the **Node.js 20 LTS runtime** and a **he
 
 ```mermaid
 flowchart TD
-    HOST["Host Machine (Windows, macOS, Linux)"] -->|Mounts APK Package| CONT["retrofit-sdk-gen Docker Container"]
+    HOST["Host Machine: Windows, macOS, Linux"] -->|"Mounts APK Package"| DOCKER_BOX
     
-    subgraph CONT["Docker Sandbox (node:20-bookworm-slim)"]
-        JADX["Headless JRE 17 + JADX Engine"]
+    subgraph DOCKER_BOX["Docker Sandbox: node:20-bookworm-slim"]
+        JADX["Headless JRE 17 and JADX Engine"]
         CLI["retrofit-sdk-gen CLI"]
-        PLAY["Scalar UI + Mock Server (:3000)"]
+        PLAY["Scalar UI and Mock Server on Port 3000"]
     end
 
-    CONT -->|Writes Generated SDKs| OUT["./output Folder on Host"]
-    CONT -->|Exposes Port 3000| BROWSER["Host Browser (http://localhost:3000)"]
+    DOCKER_BOX -->|"Writes Generated SDKs"| OUT["Output Folder on Host"]
+    DOCKER_BOX -->|"Exposes Port 3000"| BROWSER["Host Browser: http://localhost:3000"]
 ```
 
 ---

@@ -48,9 +48,9 @@ sequenceDiagram
     Svc->>Client: send("GET", endpoint, params)
     Client->>Client: Build HttpRequest with defaultHeaders
     Client->>Net: httpClient.send(request, BodyHandlers.ofString())
-    Net-->>Client: HttpResponse<String>
-    Client->>Client: Wrap in ApiResponse<T>
-    Client-->>Svc: ApiResponse<T>
+    Net-->>Client: HttpResponse (String body)
+    Client->>Client: Wrap in ApiResponse
+    Client-->>Svc: ApiResponse(String)
     Svc-->>App: Typed Response Object
 ```
 

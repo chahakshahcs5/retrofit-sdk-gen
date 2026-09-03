@@ -54,11 +54,11 @@ sequenceDiagram
 
     App->>Service: fetch_addresses_with_rx(context="checkout")
     Service->>Client: request("GET", "/addresses", query_params)
-    Client->>Client: Merge Headers & Encode URL
+    Client->>Client: Merge Headers and Encode URL
     Client->>API: urllib.request.urlopen(req)
-    API-->>Client: HTTP Status & Raw Body
+    API-->>Client: HTTP Status and Raw Body
     Client->>Client: json.loads() into ApiResponse
-    Client-->>Service: ApiResponse[AddressesDto]
+    Client-->>Service: ApiResponse(AddressesDto)
     Service-->>App: Strongly-Typed Response Object
 ```
 

@@ -32,7 +32,7 @@ When `retrofit-sdk-gen` scans an Android package or decompiled source folder, it
 ```mermaid
 flowchart LR
     INPUT["Android Package (.apk / sources)"] --> SCANNER["retrofit-sdk-gen Engine"]
-    SCANNER -->|Extracts Base URL & Interceptor Headers| SCAFFOLD["Universal Client Generator"]
+    SCANNER -->|"Extracts Base URL and Interceptor Headers"| SCAFFOLD["Universal Client Generator"]
     SCAFFOLD --> OUT["Generated SDK Directory"]
     OUT --> TS["typescript/client.ts"]
     OUT --> PY["python/client.py"]
@@ -41,7 +41,7 @@ flowchart LR
     OUT --> JV["java/Client.java"]
     OUT --> RS["rust/client.rs"]
     OUT --> CPP["cpp/client.hpp"]
-    OUT --> C["c/client.c & client.h"]
+    OUT --> C["c/client.c and client.h"]
 ```
 
 ### What `retrofit-sdk-gen` Scaffolds into the Client:

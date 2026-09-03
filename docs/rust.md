@@ -45,12 +45,12 @@ sequenceDiagram
     participant Client as Client (reqwest)
     participant Net as Remote Backend API
 
-    App->>Svc: fetch_addresses_with_rx(Some(&query))
-    Svc->>Client: send_request(Method::GET, endpoint, ...)
-    Client->>Client: Attach HeaderMap & JSON body
+    App->>Svc: fetch_addresses_with_rx(Some(query))
+    Svc->>Client: send_request(Method::GET, endpoint, options)
+    Client->>Client: Attach HeaderMap and JSON body
     Client->>Net: reqwest::Client.send().await
     Net-->>Client: reqwest::Response
-    Client-->>Svc: Result<Response, Error>
+    Client-->>Svc: Result(Response, Error)
     Svc-->>App: Typed Async Result
 ```
 

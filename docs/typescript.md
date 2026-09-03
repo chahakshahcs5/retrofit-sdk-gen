@@ -50,17 +50,17 @@ sequenceDiagram
     participant Client as defaultClient (HttpClient)
     participant API as Remote API Server
 
-    App->>Service: Service.fetchData({ queryParams })
+    App->>Service: Service.fetchData(queryParams)
     Service->>Client: request("GET", "/endpoint", options)
-    Client->>Client: Inject BaseUrl & Discovered Headers
+    Client->>Client: Inject BaseUrl and Discovered Headers
     opt beforeRequest Hook
-        Client->>Client: Compute Dynamic Signatures / Nonce
+        Client->>Client: Compute Dynamic Signatures or Nonce
     end
     Client->>API: fetch(url, RequestInit)
     API-->>Client: HTTP 200 JSON Response
-    Client->>Client: Parse into ApiResponse<T>
-    Client-->>Service: Typed Promise<ApiResponse<T>>
-    Service-->>App: Strongly-Typed Data & Autocompletion
+    Client->>Client: Parse into ApiResponse
+    Client-->>Service: Typed Promise of ApiResponse
+    Service-->>App: Strongly-Typed Data and Autocompletion
 ```
 
 ### 1. Endpoints with Query Parameters

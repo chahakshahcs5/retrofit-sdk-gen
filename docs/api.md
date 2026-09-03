@@ -35,15 +35,15 @@ import {
 flowchart TD
     SCRIPT["Your Node.js / TypeScript Build Script"] --> API["retrofit-sdk-gen Module Exports"]
     
-    API --> G["generateSdk()<br/>Full Reverse-Engineering Pipeline"]
-    API --> S["scanApis()<br/>Fast Retrofit AST Parser"]
-    API --> D["diffApis()<br/>Two-Version Changelog Comparator"]
-    API --> SEC["scanSecurityInterceptors()<br/>OkHttp Interceptor Audit"]
-    API --> P["startPlaygroundServer()<br/>Scalar UI & Mock Engine"]
-    API --> V["runSdkVerification()<br/>Native Toolchain Compiler Tests"]
+    API --> G["generateSdk(): Full Reverse-Engineering Pipeline"]
+    API --> S["scanApis(): Fast Retrofit AST Parser"]
+    API --> D["diffApis(): Two-Version Changelog Comparator"]
+    API --> SEC["scanSecurityInterceptors(): OkHttp Interceptor Audit"]
+    API --> P["startPlaygroundServer(): Scalar UI and Mock Engine"]
+    API --> V["runSdkVerification(): Native Compiler Tests"]
 
-    G --> MOD["generateModels() & generateServices()"]
-    G --> SPEC["generateOpenApi() & generatePostmanCollection()"]
+    G --> MOD["generateModels() and generateServices()"]
+    G --> SPEC["generateOpenApi() and generatePostmanCollection()"]
     G --> LANG["Language Exporters (TS, Py, Go, C#, Java, Rust, C++, C)"]
     P --> MOCK["Live Interactive Web Dashboard"]
 ```

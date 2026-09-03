@@ -47,7 +47,7 @@ sequenceDiagram
 
     App->>Svc: fetch_addresses_with_rx(opts)
     Svc->>Client: request(RequestOptions)
-    Client->>Client: Interpolate path & format query params
+    Client->>Client: Interpolate path and format query params
     Client->>Net: Transport dispatch
     Net-->>Client: Raw JSON Payload
     Client-->>Svc: ApiResponse

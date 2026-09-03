@@ -44,12 +44,12 @@ sequenceDiagram
     participant Net as Remote Backend API
 
     App->>Svc: FetchAddressesWithRxAsync(queryParams)
-    Svc->>Client: SendAsync<AddressesDto>(method, endpoint, params)
-    Client->>Client: Build HttpRequestMessage & DefaultHeaders
+    Svc->>Client: SendAsync(method, endpoint, params)
+    Client->>Client: Build HttpRequestMessage and DefaultHeaders
     Client->>Net: Client.SendAsync(request, token)
     Net-->>Client: HttpResponseMessage
-    Client->>Client: JsonSerializer.Deserialize<T>()
-    Client-->>Svc: ApiResponse<AddressesDto>
+    Client->>Client: Deserialize JSON into DTO
+    Client-->>Svc: ApiResponse(AddressesDto)
     Svc-->>App: Strongly-Typed Response Object
 ```
 

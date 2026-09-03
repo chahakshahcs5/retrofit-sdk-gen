@@ -59,16 +59,16 @@ sequenceDiagram
     autonumber
     actor App as Go Application
     participant Svc as AddressesService
-    participant Client as *Client (net/http)
+    participant Client as Client (net/http)
     participant Net as Remote Backend API
 
     App->>Svc: FetchAddressesWithRx(ctx, opts)
     Svc->>Client: DoRequest(ctx, "GET", endpoint, params)
     Client->>Client: Build http.NewRequestWithContext(ctx)
     Client->>Net: HTTPClient.Do(req)
-    Net-->>Client: *http.Response + Body
+    Net-->>Client: http.Response and Body
     Client->>Client: Read bytes into ApiResponse
-    Client-->>Svc: *ApiResponse, error
+    Client-->>Svc: ApiResponse and error
     Svc-->>App: Typed Response Struct
 ```
 
