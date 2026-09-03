@@ -119,6 +119,13 @@ npx retrofit-sdk-gen diff ./v29.1.apk ./v29.2.apk -o changelog.md
 npx retrofit-sdk-gen security ./app.apk
 ```
 
+> [!NOTE]
+> ### 💡 Reviewing & Customizing Generated Client Files
+> The initial generated client files (`client.ts`, `client.py`, `client.go`, `Client.cs`, `Client.java`, etc.) provide a fully working starting scaffold based on static code analysis. However:
+> * **Base URLs**: Android applications often construct base URLs dynamically at runtime (e.g. environment flavors like Staging/Prod, regional CDN routing, or remote configuration). You may need to adjust the `baseUrl` in your client file to match your intended backend environment.
+> * **Authentication & Dynamic Tokens**: When apps use dynamic OAuth token refreshes, HMAC signatures, or session cookies, you can plug your credentials directly into the client's auth helper or default headers.
+> * **Non-Destructive Re-runs**: `retrofit-sdk-gen` is safe to run repeatedly. Once you customize a client file, subsequent runs will **never overwrite** your custom client logic while refreshing services and models!
+
 ---
 
 ## 🛠️ CLI Complete Reference

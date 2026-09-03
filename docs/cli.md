@@ -173,6 +173,14 @@ npx retrofit-sdk-gen [input] [options]
 - **Type**: `boolean`
 - **Description**: Displays the CLI help menu.
 
+### 💡 Reviewing & Customizing Generated Client Files
+
+Because Android applications frequently configure their base URLs (e.g. dev/staging/prod flavors, dynamic regional routing) and authentication credentials at runtime via OkHttp interceptors or dependency injection, the initial generated `Client` file serves as a functional baseline.
+
+* **Base URLs**: If the decompiled code references relative paths or placeholder URLs (e.g. `https://api.example.com`), verify and update the `baseUrl` in your client file (`client.ts`, `client.py`, `client.go`, `Client.cs`, `Client.java`, etc.).
+* **Authentication Tokens**: If the API requires custom API keys, bearer tokens, or HMAC request signing, configure them using the client's `setAuth()` method or default headers map.
+* **Non-Destructive Scaffolding**: `retrofit-sdk-gen` preserves your customizations. When re-running the generator against newer APK releases, existing client files are **never overwritten**, ensuring your custom connection logic remains intact while services and data models are updated.
+
 ---
 
 ## 2. `serve` (API Playground & Mock Server)
