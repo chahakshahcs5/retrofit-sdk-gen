@@ -87,7 +87,13 @@ jobs:
               for (const lang of ['typescript', 'python', 'go', 'csharp', 'java', 'rust', 'cpp', 'c']) {
                 const res = await compileSdk(lang, 'examples/shopflow/sdks/' + lang, tc[lang]);
                 console.log('  [' + lang + '] ' + (res.passed ? 'PASSED ✅' : res.skipped ? 'SKIPPED ⏩' : 'FAILED ❌'));
-                if (res.error && !res.skipped) process.exit(1);
+                if (!res.passed && !res.skipped) {
+                  console.error('====================================================');
+                  console.error('COMPILATION FAILURE FOR [' + lang + ']:');
+                  console.error(res.error || res.output || 'Unknown error');
+                  console.error('====================================================');
+                  process.exit(1);
+                }
               }
             })();
             "
