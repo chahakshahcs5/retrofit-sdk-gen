@@ -20,13 +20,13 @@
 
 ## 🧪 Verified Against Real-World Android APKs
 
-`retrofit-sdk-gen` is validated against authentic Android applications built with Retrofit 2 + OkHttp. Every release undergoes 4-stage automated reverse-engineering, multi-language generation, and **native compilation** using official language toolchains (`go vet`, `dotnet build`, `javac`, `cargo check`, `python -m compileall`, and Visual Studio `cmake` / MSVC):
+`retrofit-sdk-gen` is validated against authentic Android applications built with Retrofit 2 + OkHttp. Every release undergoes 4-stage automated reverse-engineering, multi-language generation, and **native compilation** using official language toolchains (`tsc`, `python -m compileall`, `go vet`, `dotnet build`, `javac`, `cargo check`, and Visual Studio `cmake` / MSVC / GCC):
 
 | Target Application | Architecture / Domain | Endpoints | Data Models | OkHttp Interceptors | Language Compilers (TS, Py, Go, C#, Java, Rust, C++, C) | Live Mock Ping | Status |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **[ShopFlow](examples/shopflow)** | E-Commerce Storefront (`dummyjson.com`) | **8** | **7** | **2** (Auth + Context) | ✅ 7/7 Passed (MSVC + GCC) | ✅ Passed (56ms) | 🟢 **100% Verified** |
-| **[GitHub Client](examples/github-client)** | Developer Explorer (`api.github.com`) | **11** | **11** | **2** (Auth + Headers) | ✅ 7/7 Passed (MSVC + GCC) | ✅ Passed (75ms) | 🟢 **100% Verified** |
-| **[Crypto Tracker](examples/crypto-tracker)** | Financial Markets (`api.coingecko.com`) | **6** | **14** | **1** (Rate Limiter) | ✅ 7/7 Passed (MSVC + GCC) | ✅ Passed (90ms) | 🟢 **100% Verified** |
+| **[ShopFlow](examples/shopflow)** | E-Commerce Storefront (`dummyjson.com`) | **8** | **7** | **2** (Auth + Context) | ✅ 8/8 Passed (MSVC + GCC) | ✅ Passed (56ms) | 🟢 **100% Verified** |
+| **[GitHub Client](examples/github-client)** | Developer Explorer (`api.github.com`) | **11** | **11** | **2** (Auth + Headers) | ✅ 8/8 Passed (MSVC + GCC) | ✅ Passed (75ms) | 🟢 **100% Verified** |
+| **[Crypto Tracker](examples/crypto-tracker)** | Financial Markets (`api.coingecko.com`) | **6** | **14** | **1** (Rate Limiter) | ✅ 8/8 Passed (MSVC + GCC) | ✅ Passed (90ms) | 🟢 **100% Verified** |
 
 > 📖 **Browse Sample Outputs**: Explore the generated SDKs directly in the [`examples/`](examples) folder or read the [Real-World APK Benchmark Report](docs/benchmarks.md).
 

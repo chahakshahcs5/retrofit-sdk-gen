@@ -77,7 +77,7 @@ jobs:
         run: |
           if [ -s "test-fixtures/ShopFlow.apk" ]; then
             echo "🚀 Running Full 4-Stage Verification Pipeline on ShopFlow.apk..."
-            node ./dist/cli.js test "test-fixtures/ShopFlow.apk" --lang python,go,csharp,java,rust,cpp,c
+            node ./dist/cli.js test "test-fixtures/ShopFlow.apk"
           else
             echo "⚠️  Fixtures release not yet published; verifying pre-generated 8-language SDK matrix..."
             node -e "

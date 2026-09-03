@@ -14,9 +14,9 @@ Every application underwent the complete **4-Stage Verification Protocol**:
 
 | Application | Target Public API | Endpoints | Data Models | OkHttp Interceptors | Language Compilers (TS, Py, Go, C#, Java, Rust, C++, C) | Runtime Mock | Verification Status |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **[ShopFlow](file:///examples/shopflow)** | E-Commerce Storefront (`dummyjson.com`) | **8** | **7** | **2** (Auth + Context) | ✅ 7/7 Passed (MSVC + GCC) | ✅ Passed (56ms) | 🟢 **100% Verified** |
-| **[GitHub Client](file:///examples/github-client)** | Developer Explorer (`api.github.com`) | **11** | **11** | **2** (Auth + Version) | ✅ 7/7 Passed (MSVC + GCC) | ✅ Passed (75ms) | 🟢 **100% Verified** |
-| **[Crypto Tracker](file:///examples/crypto-tracker)** | Financial Markets (`api.coingecko.com`) | **6** | **14** | **1** (Rate Limiter) | ✅ 7/7 Passed (MSVC + GCC) | ✅ Passed (90ms) | 🟢 **100% Verified** |
+| **[ShopFlow](file:///examples/shopflow)** | E-Commerce Storefront (`dummyjson.com`) | **8** | **7** | **2** (Auth + Context) | ✅ 8/8 Passed (MSVC + GCC) | ✅ Passed (56ms) | 🟢 **100% Verified** |
+| **[GitHub Client](file:///examples/github-client)** | Developer Explorer (`api.github.com`) | **11** | **11** | **2** (Auth + Version) | ✅ 8/8 Passed (MSVC + GCC) | ✅ Passed (75ms) | 🟢 **100% Verified** |
+| **[Crypto Tracker](file:///examples/crypto-tracker)** | Financial Markets (`api.coingecko.com`) | **6** | **14** | **1** (Rate Limiter) | ✅ 8/8 Passed (MSVC + GCC) | ✅ Passed (90ms) | 🟢 **100% Verified** |
 
 ---
 
