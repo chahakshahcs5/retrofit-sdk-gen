@@ -1,6 +1,6 @@
 {
   "name": "retrofit-sdk-gen",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Universal Android Retrofit to Multi-Language SDK Generator: emits TypeScript, Python, Go, C#, Java, Rust, C++, C SDKs, OpenAPI 3.0, and Postman Collections.",
   "engines": {
     "node": ">=18.0.0"
