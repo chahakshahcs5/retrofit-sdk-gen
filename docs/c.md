@@ -40,6 +40,22 @@ make
 
 ## 💡 Making API Calls
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as C99 Application
+    participant Svc as app_addresses_service
+    participant Client as app_client_t
+    participant Net as Remote Backend API
+
+    App->>Svc: app_addresses_service_fetch(client, &opts)
+    Svc->>Client: app_client_request(client, &req_opts)
+    Client->>Net: libcurl network dispatch
+    Net-->>Client: HTTP Status & Response Buffer
+    Client-->>Svc: app_response_t*
+    Svc-->>App: Return response struct
+```
+
 ```c
 #include "client.h"
 #include "services.h"

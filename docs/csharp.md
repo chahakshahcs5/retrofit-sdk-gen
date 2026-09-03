@@ -35,6 +35,24 @@ dotnet build
 
 ## 💡 Making API Calls
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as C# Application
+    participant Svc as AddressesService
+    participant Client as HttpClientWrapper
+    participant Net as Remote Backend API
+
+    App->>Svc: FetchAddressesWithRxAsync(queryParams)
+    Svc->>Client: SendAsync<AddressesDto>(method, endpoint, params)
+    Client->>Client: Build HttpRequestMessage & DefaultHeaders
+    Client->>Net: Client.SendAsync(request, token)
+    Net-->>Client: HttpResponseMessage
+    Client->>Client: JsonSerializer.Deserialize<T>()
+    Client-->>Svc: ApiResponse<AddressesDto>
+    Svc-->>App: Strongly-Typed Response Object
+```
+
 ### 1. Basic Request with Authentication
 ```csharp
 using System;

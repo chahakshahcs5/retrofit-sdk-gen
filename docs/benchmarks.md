@@ -12,6 +12,15 @@ Every application underwent the complete **4-Stage Verification Protocol**:
 3. **Stage 3 (Native Toolchain Compilation)**: Type-checking and compiling each SDK natively using installed compilers (`go vet`, `dotnet build`, `javac`, `cargo check`, `python -m compileall`).
 4. **Stage 4 (Runtime Mock Execution)**: Ephemeral local mock server execution, real HTTP ping, and JSON schema response validation.
 
+```mermaid
+flowchart LR
+    APK["Target APK Package"] --> S1["Stage 1: AST Reverse-Eng<br/>(JADX, Endpoints, DTOs)"]
+    S1 --> S2["Stage 2: Multi-Lang Codegen<br/>(TS, Py, Go, C#, Java, Rust, C++, C)"]
+    S2 --> S3["Stage 3: Compiler Matrix<br/>(tsc, py_compile, go vet, dotnet, javac, cargo, cmake)"]
+    S3 --> S4["Stage 4: Live Mock Ping<br/>(Ephemeral Server, HTTP Ping, Schema Match)"]
+    S4 --> PASS["🟢 100% Native Compilation Pass"]
+```
+
 | Application | Target Public API | Endpoints | Data Models | OkHttp Interceptors | Language Compilers (TS, Py, Go, C#, Java, Rust, C++, C) | Runtime Mock | Verification Status |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **[ShopFlow](file:///examples/shopflow)** | E-Commerce Storefront (`dummyjson.com`) | **8** | **7** | **2** (Auth + Context) | ✅ 8/8 Passed (MSVC + GCC) | ✅ Passed (56ms) | 🟢 **100% Verified** |

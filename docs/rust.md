@@ -37,6 +37,23 @@ cargo check
 
 ## 💡 Making API Calls
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Rust Binary / Crate
+    participant Svc as AddressesService
+    participant Client as Client (reqwest)
+    participant Net as Remote Backend API
+
+    App->>Svc: fetch_addresses_with_rx(Some(&query))
+    Svc->>Client: send_request(Method::GET, endpoint, ...)
+    Client->>Client: Attach HeaderMap & JSON body
+    Client->>Net: reqwest::Client.send().await
+    Net-->>Client: reqwest::Response
+    Client-->>Svc: Result<Response, Error>
+    Svc-->>App: Typed Async Result
+```
+
 ### 1. Asynchronous API Requests with Tokio
 ```rust
 use app_sdk::{Client, AddressesService};

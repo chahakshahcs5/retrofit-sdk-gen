@@ -42,6 +42,27 @@ defaultClient.headers["X-Client-Version"] = "1.0.0";
 
 ## 💡 Making API Calls
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Application Code
+    participant Service as Generated Service
+    participant Client as defaultClient (HttpClient)
+    participant API as Remote API Server
+
+    App->>Service: Service.fetchData({ queryParams })
+    Service->>Client: request("GET", "/endpoint", options)
+    Client->>Client: Inject BaseUrl & Discovered Headers
+    opt beforeRequest Hook
+        Client->>Client: Compute Dynamic Signatures / Nonce
+    end
+    Client->>API: fetch(url, RequestInit)
+    API-->>Client: HTTP 200 JSON Response
+    Client->>Client: Parse into ApiResponse<T>
+    Client-->>Service: Typed Promise<ApiResponse<T>>
+    Service-->>App: Strongly-Typed Data & Autocompletion
+```
+
 ### 1. Endpoints with Query Parameters
 ```typescript
 import { AddressesService } from "./my-ts-sdk";

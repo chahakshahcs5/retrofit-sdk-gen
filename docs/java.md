@@ -36,6 +36,24 @@ mvn clean compile
 
 ## 💡 Making API Calls
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Java Application
+    participant Svc as AddressesService
+    participant Client as Client (java.net.http)
+    participant Net as Remote Backend API
+
+    App->>Svc: fetchAddressesWithRx(queryParams)
+    Svc->>Client: send("GET", endpoint, params)
+    Client->>Client: Build HttpRequest with defaultHeaders
+    Client->>Net: httpClient.send(request, BodyHandlers.ofString())
+    Net-->>Client: HttpResponse<String>
+    Client->>Client: Wrap in ApiResponse<T>
+    Client-->>Svc: ApiResponse<T>
+    Svc-->>App: Typed Response Object
+```
+
 ### 1. Basic Request with Authentication
 ```java
 package com.example;

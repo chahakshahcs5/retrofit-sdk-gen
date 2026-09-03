@@ -44,6 +44,24 @@ default_client.headers["X-Client-Version"] = "1.0.0"
 
 ## 💡 Making API Calls
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Python Script
+    participant Service as AddressesService
+    participant Client as default_client (HttpClient)
+    participant API as Remote API Backend
+
+    App->>Service: fetch_addresses_with_rx(context="checkout")
+    Service->>Client: request("GET", "/addresses", query_params)
+    Client->>Client: Merge Headers & Encode URL
+    Client->>API: urllib.request.urlopen(req)
+    API-->>Client: HTTP Status & Raw Body
+    Client->>Client: json.loads() into ApiResponse
+    Client-->>Service: ApiResponse[AddressesDto]
+    Service-->>App: Strongly-Typed Response Object
+```
+
 ### 1. Endpoints with Query Parameters
 ```python
 from my_python_sdk.services import AddressesService

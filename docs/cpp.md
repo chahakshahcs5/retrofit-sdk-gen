@@ -37,6 +37,23 @@ target_link_libraries(my_application PRIVATE app_sdk)
 
 ## 💡 Making API Calls
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as C++17 Application
+    participant Svc as AddressesService
+    participant Client as Client (get_default)
+    participant Net as Remote Backend API
+
+    App->>Svc: fetch_addresses_with_rx(opts)
+    Svc->>Client: request(RequestOptions)
+    Client->>Client: Interpolate path & format query params
+    Client->>Net: Transport dispatch
+    Net-->>Client: Raw JSON Payload
+    Client-->>Svc: ApiResponse
+    Svc-->>App: Strongly-Typed Result
+```
+
 ```cpp
 #include "sdk.hpp"
 #include <iostream>

@@ -29,6 +29,27 @@ import {
 
 ---
 
+## 🏛️ Programmatic Architecture
+
+```mermaid
+flowchart TD
+    SCRIPT["Your Node.js / TypeScript Build Script"] --> API["retrofit-sdk-gen Module Exports"]
+    
+    API --> G["generateSdk()<br/>Full Reverse-Engineering Pipeline"]
+    API --> S["scanApis()<br/>Fast Retrofit AST Parser"]
+    API --> D["diffApis()<br/>Two-Version Changelog Comparator"]
+    API --> SEC["scanSecurityInterceptors()<br/>OkHttp Interceptor Audit"]
+    API --> P["startPlaygroundServer()<br/>Scalar UI & Mock Engine"]
+    API --> V["runSdkVerification()<br/>Native Toolchain Compiler Tests"]
+
+    G --> MOD["generateModels() & generateServices()"]
+    G --> SPEC["generateOpenApi() & generatePostmanCollection()"]
+    G --> LANG["Language Exporters (TS, Py, Go, C#, Java, Rust, C++, C)"]
+    P --> MOCK["Live Interactive Web Dashboard"]
+```
+
+---
+
 ## Table of Contents
 1. [`generateSdk()`](#1-generatesdkoptions)
 2. [`startPlaygroundServer()`](#2-startplaygroundserveroptions)

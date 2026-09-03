@@ -60,6 +60,25 @@ retrofit-sdk-gen [input] [options]
 | `clean` | `npx retrofit-sdk-gen clean [--cache] [--jadx] [--all]` | Cleans cached decompiled sources and/or downloaded JADX toolchain. |
 | `test` | `npx retrofit-sdk-gen test <input> [options]` | Runs 4-stage automated verification (AST, generation, native compile, mock test). |
 
+### 🧭 CLI Dispatch Flow
+
+```mermaid
+flowchart LR
+    CLI["npx retrofit-sdk-gen"] --> CMD{"Command Selector"}
+    CMD -->|generate (default)| G["Generate Multi-Lang SDKs<br/>& OpenAPI/Postman Specs"]
+    CMD -->|serve| S["Start Interactive Scalar UI<br/>& Synthetic Mock API Server"]
+    CMD -->|diff| D["Compare Two APKs<br/>& Emit Changelog Diff"]
+    CMD -->|security| SEC["Audit OkHttp Interceptors<br/>for Auth & Tracking Headers"]
+    CMD -->|clean| C["Wipe Decompiled Cache<br/>or Downloaded JADX Binaries"]
+    CMD -->|test| T["Run 4-Stage Verification<br/>with Native Language Compilers"]
+
+    G --> OUT["./sdk Output Folder"]
+    S --> BROWSER["Browser http://localhost:3000"]
+    D --> DIFF_MD["changelog.md Report"]
+    SEC --> REPORT["Console Security Audit"]
+    T --> VERIF["Automated Verification Report"]
+```
+
 ---
 
 ## 1. `generate` (Default Command)
