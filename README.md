@@ -134,6 +134,26 @@ npx retrofit-sdk-gen diff ./v29.1.apk ./v29.2.apk -o changelog.md
 npx retrofit-sdk-gen security ./app.apk
 ```
 
+### 🐳 Quick Start (Docker)
+
+Run `retrofit-sdk-gen` with zero local Node.js or Java/JADX dependencies:
+
+```bash
+# 1. Build the lightweight Docker image:
+docker build -t retrofit-sdk-gen:latest .
+
+# 2. Boot local Scalar API Playground & Mock Server:
+docker run --rm -it -p 3000:3000 -v "$(pwd)/app.apk:/work/app.apk:ro" retrofit-sdk-gen:latest serve /work/app.apk --port 3000
+
+# 3. Generate ALL 8 Language SDKs:
+docker run --rm -v "$(pwd)/app.apk:/work/app.apk:ro" -v "$(pwd)/output:/output" retrofit-sdk-gen:latest /work/app.apk -o /output --lang all --openapi --postman
+
+# 4. Or use Docker Compose:
+docker compose up playground
+```
+
+📖 For full configuration, see the dedicated [🐳 Docker Deployment Guide](docs/docker.md).
+
 > [!NOTE]
 > ### 💡 Reviewing & Customizing Generated Client Files
 > The initial generated client files (`client.ts`, `client.py`, `client.go`, `Client.cs`, `Client.java`, etc.) provide a fully working starting scaffold based on static code analysis. However:
@@ -265,6 +285,7 @@ console.log("Auth Headers:", security.authHeaders);
 ## 📚 Dedicated Guides
 
 - [🌐 Universal Client Configuration Guide](docs/client.md)
+- [🐳 Docker & Container Deployment Guide](docs/docker.md)
 - [📘 TypeScript SDK Guide](docs/typescript.md)
 - [🐍 Python SDK Guide](docs/python.md)
 - [🐹 Go (Golang) SDK Guide](docs/go.md)

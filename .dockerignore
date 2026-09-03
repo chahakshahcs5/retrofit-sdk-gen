@@ -1,0 +1,24 @@
+# Git and GitHub
+.git
+.github
+.gitignore
+
+# Dependencies and build outputs
+node_modules
+dist
+
+# Temporary and log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+.DS_Store
+Thumbs.db
+
+# Test artifacts and caches
+output
+output-*
+test-output
+coverage
+.cache
+~/.retrofit-sdk-gen

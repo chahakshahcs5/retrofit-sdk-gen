@@ -20,7 +20,10 @@
     "test:shopflow": "node ./dist/cli.js test test-fixtures/ShopFlow.apk",
     "test:github": "node ./dist/cli.js test \"test-fixtures/GitHub Client.apk\"",
     "test:crypto": "node ./dist/cli.js test \"test-fixtures/Crypto Tracker.apk\"",
-    "test:all-apks": "npm run test:shopflow && npm run test:github && npm run test:crypto"
+    "test:all-apks": "npm run test:shopflow && npm run test:github && npm run test:crypto",
+    "docker:build": "docker build -t retrofit-sdk-gen:latest .",
+    "docker:serve": "docker compose up playground",
+    "docker:generate": "docker compose run --rm generate"
   },
   "keywords": [
     "retrofit",

@@ -1,0 +1,55 @@
+services:
+  # ============================================================================
+  # 1. Interactive API Playground & Mock Server
+  # Boots local Scalar Reference UI on http://localhost:3000
+  # Usage:
+  #   docker compose up playground
+  # ============================================================================
+  playground:
+    build:
+      context: .
+      target: runtime
+    image: retrofit-sdk-gen:latest
+    container_name: retrofit-playground
+    ports:
+      - "3000:3000"
+    volumes:
+      # Place your target APK into ./packages/app.apk
+      - ./packages:/packages:ro
+    environment:
+      - PORT=3000
+    command: ["serve", "/packages/app.apk", "--port", "3000"]
+    restart: unless-stopped
+
+  # ============================================================================
+  # 2. Universal SDK Generator
+  # Generates all 8 language SDKs + OpenAPI 3.0 + Postman Collection into ./output
+  # Usage:
+  #   docker compose run --rm generate
+  # ============================================================================
+  generate:
+    build:
+      context: .
+      target: runtime
+    image: retrofit-sdk-gen:latest
+    container_name: retrofit-generator
+    volumes:
+      - ./packages:/packages:ro
+      - ./output:/output
+    command: ["/packages/app.apk", "--output", "/output", "--lang", "all", "--openapi", "--postman"]
+
+  # ============================================================================
+  # 3. 4-Stage Native Verification Runner
+  # Verifies SDKs using native compilers inside isolated full-test container
+  # Usage:
+  #   docker compose run --rm test-apk
+  # ============================================================================
+  test-apk:
+    build:
+      context: .
+      target: full-test
+    image: retrofit-sdk-gen:full-test
+    container_name: retrofit-verifier
+    volumes:
+      - ./packages:/packages:ro
+    command: ["/packages/app.apk"]
